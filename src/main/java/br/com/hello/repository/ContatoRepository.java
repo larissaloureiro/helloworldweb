@@ -7,12 +7,21 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.hello.adapter.ConnectionFactory;
 import br.com.hello.entity.Contato;
 
 public class ContatoRepository implements IRepository<Contato>{
 	private Connection connection;
 	
 	//jdbc
+	
+	public ContatoRepository() {
+		try {
+			connection = ConnectionFactory.getConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	@Override
 	public void save(Contato contato) {
@@ -34,7 +43,7 @@ public class ContatoRepository implements IRepository<Contato>{
 		String sql = "DELETE FROM pessoas WHERE id = ?"; //evitar ataques de SQL injection
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
-			stmt.setInt(1, id);;
+			stmt.setInt(1, id);
 			stmt.execute();
 			stmt.close();
 			

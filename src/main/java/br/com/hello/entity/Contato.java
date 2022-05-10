@@ -1,9 +1,11 @@
 package br.com.hello.entity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Contato {
+public class Contato implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String nome;
 	private String email;
@@ -14,9 +16,7 @@ public class Contato {
 
 	}
 	
-	public Contato(Integer id, String nome, String email) {
-		super();
-		this.id = id;
+	public Contato(String nome, String email) {
 		this.nome = nome;
 		this.email = email;
 	}
@@ -61,7 +61,7 @@ public class Contato {
 	
 	@Override
 	public String toString(){
-		return "Id: " + getId() + " - Nome: " + getNome() + " - Email: " + getEmail();
+		return "Nome: " + getNome() + " - Email: " + getEmail();
 	}
 	
 }
